@@ -1,14 +1,14 @@
 title: 照片墙
 subtitle: Take it easy
 description: 放轻松
-cover: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/IMG_7586.4e91my1ve140.17iz0sa56gik.webp'
+cover: 'https://avatars.githubusercontent.com/u/146502758?s=400&u=b8a39089c210f747787383af20846de9556386c8&v=4'
 author: sparkzky
 
 footer_logo: 
   use: self
   self:
     link: 'https://sparkzky.github.io/'
-    src: 'https://github.com/lfkdsk/picx-images-hosting/raw/master/20230817/tripper2white.2pbuwaqvndu0.webp'
+    src: 'https://avatars.githubusercontent.com/u/146502758?s=400&u=b8a39089c210f747787383af20846de9556386c8&v=4'
 
 url: https://sparkzky.github.io/gallery
 root: /gallery
