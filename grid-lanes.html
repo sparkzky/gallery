@@ -69,7 +69,7 @@
   <!-- https://material.io/resources/icons/?style=outline -->
   
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_16.0f9623ad85e64efb07f6dddba36807a6.js"></script>
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_20.a16abc3c381b339cccd05404911bbf44.js"></script>
   
   
 <style>
@@ -228,33 +228,41 @@
   
   <!--只在 **非文章** 页面显示-->
   
-  <a class="itp-float-bar-item rounded" href="/gallery/location" title="地图">
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/gallery/location" title="地图">
     
     <iconpark-icon class="navicon" name="local-two"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="https://sparkzky.github.io" title="归档">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" href="https://sparkzky.github.io" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/grid-all" title="时间线">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" href="/gallery/random" title="随机">
     
-    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/status" title="状态监控">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/gallery/status" title="状态监控">
     
     <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/random" title="随机">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-4" href="/gallery/grid-all" title="时间线">
     
-    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    
+  </a>
+  
+  
+  <a class="itp-float-bar-item rounded itp-nav-more" id="itp_nav_more" href="javascript:void(0)" title="More" aria-label="More">
+    
+    <iconpark-icon class="navicon" name="all-application"></iconpark-icon>
     
   </a>
   
@@ -272,6 +280,115 @@
   </div>
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
+
+<div class="itp-nav-sheet" id="itp_nav_sheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="itp-nav-sheet-handle"></div>
+  <div class="itp-nav-sheet-grid">
+    
+    <a class="itp-nav-sheet-item" href="/gallery/status">
+      <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+      <span>状态监控</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/gallery/grid-all">
+      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+      <span>时间线</span>
+    </a>
+    
+  </div>
+</div>
+<div class="itp-nav-sheet-bg" id="itp_nav_sheet_bg"></div>
+<style>
+  /* the SCSS .itp-float-bar .itp-float-bar-item rule is 2-class specificity,
+     so we have to match it here or `display: inline-flex` wins on desktop */
+  .itp-float-bar .itp-nav-more { display: none; }
+  .itp-nav-sheet, .itp-nav-sheet-bg { display: none; }
+  @media (max-width: 768px) {
+    /* hide overflow nav items in the floatbar; sheet shows them all */
+    .itp-float-bar .itp-nav-item.itp-nav-idx-3,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-4,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-5,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-6,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-7,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-8,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-9 { display: none; }
+    .itp-float-bar .itp-nav-more { display: flex; }
+  }
+  .itp-nav-sheet-bg {
+    position: fixed; inset: 0;
+    background: rgba(20,20,20,.35);
+    z-index: 1100;
+    opacity: 0; transition: opacity .18s ease-out;
+  }
+  .itp-nav-sheet-bg.show { display: block; opacity: 1; }
+  .itp-nav-sheet {
+    position: fixed; left: 0; right: 0;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 1101;
+    background: var(--surface, #fff);
+    border-top-left-radius: var(--radius-lg, 14px);
+    border-top-right-radius: var(--radius-lg, 14px);
+    box-shadow: 0 -8px 28px rgba(0,0,0,.18);
+    padding: 8px 16px 20px;
+    transform: translateY(100%);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1);
+  }
+  .itp-nav-sheet.show { display: block; transform: translateY(0); }
+  .itp-nav-sheet-handle {
+    width: 40px; height: 4px; border-radius: 2px;
+    background: rgba(120,120,120,.35);
+    margin: 6px auto 14px;
+  }
+  .itp-nav-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 8px;
+  }
+  .itp-nav-sheet-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 8px 4px;
+    color: var(--on-surface, #2f3a2f);
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 10px;
+    transition: background-color .15s ease;
+  }
+  .itp-nav-sheet-item:active { background: rgba(120,120,120,.12); }
+  .itp-nav-sheet-item iconpark-icon { font-size: 24px; }
+  @media (prefers-color-scheme: dark) {
+    .itp-nav-sheet { background: #1d2326; }
+    .itp-nav-sheet-item { color: #e6e0d0; }
+    .itp-nav-sheet-bg { background: rgba(0,0,0,.55); }
+  }
+</style>
+<script>
+  (function () {
+    var btn = document.getElementById('itp_nav_more');
+    var sheet = document.getElementById('itp_nav_sheet');
+    var bg = document.getElementById('itp_nav_sheet_bg');
+    if (!btn || !sheet || !bg) return;
+    function open() {
+      sheet.style.display = 'block'; bg.style.display = 'block';
+      // next frame so the transition runs
+      requestAnimationFrame(function () { sheet.classList.add('show'); bg.classList.add('show'); });
+      sheet.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      sheet.classList.remove('show'); bg.classList.remove('show');
+      sheet.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { sheet.style.display = 'none'; bg.style.display = 'none'; }, 220);
+    }
+    btn.addEventListener('click', function (e) { e.preventDefault(); sheet.classList.contains('show') ? close() : open(); });
+    bg.addEventListener('click', close);
+    sheet.querySelectorAll('.itp-nav-sheet-item').forEach(function (a) {
+      a.addEventListener('click', function () { close(); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.classList.contains('show')) close();
+    });
+  })();
+</script>
+
 
 
 <style>
@@ -1134,11 +1251,37 @@
                 render();
             };
 
+            const getFitDimensions = () => {
+                const padW = imgWrap.clientWidth - 24;
+                const padH = imgWrap.clientHeight - 24;
+                if (!img.naturalWidth || !img.naturalHeight) return { fitW: padW, fitH: padH, padW, padH };
+                const nat = img.naturalWidth / img.naturalHeight;
+                let fitW, fitH;
+                if (padW / padH > nat) { fitH = padH; fitW = fitH * nat; }
+                else { fitW = padW; fitH = fitW / nat; }
+                return { fitW, fitH, padW, padH };
+            };
+
             const applyZoom = () => {
-                const t = `translate3d(${viewerZoom.tx}px, ${viewerZoom.ty}px, 0) scale(${viewerZoom.scale})`;
-                img.style.transform = t;
-                if (liveVideoEl) liveVideoEl.style.transform = t;
-                btnZoom.textContent = `${viewerZoom.scale.toFixed(1)}×`;
+                const s = viewerZoom.scale;
+                btnZoom.textContent = `${s.toFixed(1)}×`;
+                const t = `translate3d(${viewerZoom.tx}px, ${viewerZoom.ty}px, 0)`;
+                if (s <= 1) {
+                    img.style.removeProperty('width');
+                    img.style.removeProperty('height');
+                    img.style.removeProperty('max-width');
+                    img.style.removeProperty('max-height');
+                    img.style.transform = '';
+                    if (liveVideoEl) liveVideoEl.style.transform = '';
+                } else {
+                    const { fitW, fitH } = getFitDimensions();
+                    img.style.maxWidth = 'none';
+                    img.style.maxHeight = 'none';
+                    img.style.width = `${fitW * s}px`;
+                    img.style.height = `${fitH * s}px`;
+                    img.style.transform = t;
+                    if (liveVideoEl) liveVideoEl.style.transform = `${t} scale(${s})`;
+                }
             };
 
             const resetZoom = () => {
@@ -1571,33 +1714,46 @@
                 }
             };
 
+            const makeThumb = (i) => {
+                const p = loadedPhotos[i];
+                const t = document.createElement('button');
+                t.type = 'button';
+                t.className = 'glv-thumb' + (i === viewerIndex ? ' active' : '');
+                const im = document.createElement('img');
+                im.draggable = false;
+                im.alt = p.name || '';
+                im.src = 'https://cdn.jsdelivr.net/gh/sparkzky/gallery@thumbnail/' + p.path.replace(/\.\w+$/, '.webp');
+                t.appendChild(im);
+                t.addEventListener('click', () => open(i));
+                return t;
+            };
+
+            const attachFilmLoadMore = () => {
+                if (!hasMore || !film.lastChild) return;
+                const obs = new IntersectionObserver((entries) => {
+                    if (!entries[0].isIntersecting || !hasMore || isFetching) return;
+                    obs.disconnect();
+                    const beforeLen = loadedPhotos.length;
+                    page += 1;
+                    fetchData();
+                    for (let i = beforeLen; i < loadedPhotos.length; i++) {
+                        film.appendChild(makeThumb(i));
+                    }
+                    attachFilmLoadMore();
+                }, { root: film, rootMargin: '0px', threshold: 0.1 });
+                obs.observe(film.lastChild);
+            };
+
             const renderFilm = (skipLoadMore) => {
                 film.textContent = '';
                 if (viewerIndex < 0) return;
                 const start = clamp(viewerIndex - 12, 0, loadedPhotos.length - 1);
-                const end = clamp(viewerIndex + 12, 0, loadedPhotos.length - 1);
+                const end = loadedPhotos.length - 1;
                 for (let i = start; i <= end; i++) {
-                    const p = loadedPhotos[i];
-                    const t = document.createElement('button');
-                    t.type = 'button';
-                    t.className = 'glv-thumb' + (i === viewerIndex ? ' active' : '');
-                    const im = document.createElement('img');
-                    im.draggable = false;
-                    im.alt = p.name || '';
-                    im.src = 'https://cdn.jsdelivr.net/gh/sparkzky/gallery@thumbnail/' + p.path.replace(/\.\w+$/, '.webp');
-                    t.appendChild(im);
-                    t.addEventListener('click', () => open(i));
-                    film.appendChild(t);
+                    film.appendChild(makeThumb(i));
                 }
-
-                if (skipLoadMore) return;
-                if (hasMore && !isFetching && end === loadedPhotos.length - 1) {
-                    const before = loadedPhotos.length;
-                    page += 1;
-                    fetchData();
-                    if (loadedPhotos.length !== before && viewerIndex >= 0) {
-                        renderFilm(true);
-                    }
+                if (!skipLoadMore) {
+                    attachFilmLoadMore();
                 }
             };
 
@@ -1742,18 +1898,36 @@
                 });
             });
 
+            const clampPan = () => {
+                if (viewerZoom.scale <= 1) { viewerZoom.tx = 0; viewerZoom.ty = 0; return; }
+                const { fitW, fitH, padW, padH } = getFitDimensions();
+                const maxTx = Math.max(0, (fitW * viewerZoom.scale - padW) / 2);
+                const maxTy = Math.max(0, (fitH * viewerZoom.scale - padH) / 2);
+                viewerZoom.tx = clamp(viewerZoom.tx, -maxTx, maxTx);
+                viewerZoom.ty = clamp(viewerZoom.ty, -maxTy, maxTy);
+            };
+
             imgWrap.addEventListener(
                 'wheel',
                 (e) => {
                     if (root.hidden) return;
                     e.preventDefault();
+                    const oldScale = viewerZoom.scale;
                     const delta = e.deltaY > 0 ? -0.2 : 0.2;
-                    const next = clamp(viewerZoom.scale + delta, 1, 4);
-                    viewerZoom.scale = next;
+                    const next = clamp(oldScale + delta, 1, 4);
+                    if (next === oldScale) return;
                     if (next === 1) {
                         viewerZoom.tx = 0;
                         viewerZoom.ty = 0;
+                    } else {
+                        const rect = imgWrap.getBoundingClientRect();
+                        const mx = e.clientX - (rect.left + rect.width / 2);
+                        const my = e.clientY - (rect.top + rect.height / 2);
+                        viewerZoom.tx = mx - (mx - viewerZoom.tx) * next / oldScale;
+                        viewerZoom.ty = my - (my - viewerZoom.ty) * next / oldScale;
                     }
+                    viewerZoom.scale = next;
+                    clampPan();
                     applyZoom();
                 },
                 { passive: false }
@@ -1762,11 +1936,20 @@
             imgWrap.addEventListener('dblclick', (e) => {
                 if (root.hidden) return;
                 e.preventDefault();
-                viewerZoom.scale = viewerZoom.scale === 1 ? 2 : 1;
-                if (viewerZoom.scale === 1) {
+                const oldScale = viewerZoom.scale;
+                const next = oldScale === 1 ? 2 : 1;
+                if (next === 1) {
                     viewerZoom.tx = 0;
                     viewerZoom.ty = 0;
+                } else {
+                    const rect = imgWrap.getBoundingClientRect();
+                    const mx = e.clientX - (rect.left + rect.width / 2);
+                    const my = e.clientY - (rect.top + rect.height / 2);
+                    viewerZoom.tx = mx - (mx - viewerZoom.tx) * next / oldScale;
+                    viewerZoom.ty = my - (my - viewerZoom.ty) * next / oldScale;
                 }
+                viewerZoom.scale = next;
+                clampPan();
                 applyZoom();
             });
 
@@ -1783,8 +1966,11 @@
 
             imgWrap.addEventListener('pointermove', (e) => {
                 if (!viewerZoom.panning) return;
-                viewerZoom.tx = viewerZoom.baseTx + (e.clientX - viewerZoom.px);
-                viewerZoom.ty = viewerZoom.baseTy + (e.clientY - viewerZoom.py);
+                const { fitW, fitH, padW, padH } = getFitDimensions();
+                const maxTx = Math.max(0, (fitW * viewerZoom.scale - padW) / 2);
+                const maxTy = Math.max(0, (fitH * viewerZoom.scale - padH) / 2);
+                viewerZoom.tx = clamp(viewerZoom.baseTx + (e.clientX - viewerZoom.px), -maxTx, maxTx);
+                viewerZoom.ty = clamp(viewerZoom.baseTy + (e.clientY - viewerZoom.py), -maxTy, maxTy);
                 applyZoom();
             });
 
@@ -2453,7 +2639,6 @@
             object-fit: contain;
             image-orientation: from-image;
             transform-origin: center;
-            will-change: transform;
             user-select: none;
             transition: filter 0.18s ease, opacity 0.18s ease;
             box-shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
@@ -2472,7 +2657,6 @@
             height: calc(100% - 24px);
             object-fit: contain;
             transform-origin: center;
-            will-change: transform;
             user-select: none;
             box-shadow: 0 18px 70px rgba(0, 0, 0, 0.55);
             outline: 1px solid rgba(255, 255, 255, 0.08);

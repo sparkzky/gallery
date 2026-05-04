@@ -69,7 +69,7 @@
   <!-- https://material.io/resources/icons/?style=outline -->
   
   
-  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_16.0f9623ad85e64efb07f6dddba36807a6.js"></script>
+  <script src="https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_29703_20.a16abc3c381b339cccd05404911bbf44.js"></script>
   
   
 <style>
@@ -228,33 +228,41 @@
   
   <!--只在 **非文章** 页面显示-->
   
-  <a class="itp-float-bar-item rounded" href="/gallery/location" title="地图">
+  
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-0" href="/gallery/location" title="地图">
     
     <iconpark-icon class="navicon" name="local-two"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="https://sparkzky.github.io" title="归档">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-1" href="https://sparkzky.github.io" title="归档">
     
     <iconpark-icon class="navicon" name="inbox"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/grid-all" title="时间线">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-2" href="/gallery/random" title="随机">
     
-    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/status" title="状态监控">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-3" href="/gallery/status" title="状态监控">
     
     <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
     
   </a>
   
-  <a class="itp-float-bar-item rounded" href="/gallery/random" title="随机">
+  <a class="itp-float-bar-item rounded itp-nav-item itp-nav-idx-4" href="/gallery/grid-all" title="时间线">
     
-    <iconpark-icon class="navicon" name="pic"></iconpark-icon>
+    <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+    
+  </a>
+  
+  
+  <a class="itp-float-bar-item rounded itp-nav-more" id="itp_nav_more" href="javascript:void(0)" title="More" aria-label="More">
+    
+    <iconpark-icon class="navicon" name="all-application"></iconpark-icon>
     
   </a>
   
@@ -273,6 +281,115 @@
   <div class="itp-float-layer-bg layer-bg-nodisplay" id="close_layer"></div>
 </div>
 
+<div class="itp-nav-sheet" id="itp_nav_sheet" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="itp-nav-sheet-handle"></div>
+  <div class="itp-nav-sheet-grid">
+    
+    <a class="itp-nav-sheet-item" href="/gallery/status">
+      <iconpark-icon class="navicon" name="list-view"></iconpark-icon>
+      <span>状态监控</span>
+    </a>
+    
+    <a class="itp-nav-sheet-item" href="/gallery/grid-all">
+      <iconpark-icon class="navicon" name="grid-nine"></iconpark-icon>
+      <span>时间线</span>
+    </a>
+    
+  </div>
+</div>
+<div class="itp-nav-sheet-bg" id="itp_nav_sheet_bg"></div>
+<style>
+  /* the SCSS .itp-float-bar .itp-float-bar-item rule is 2-class specificity,
+     so we have to match it here or `display: inline-flex` wins on desktop */
+  .itp-float-bar .itp-nav-more { display: none; }
+  .itp-nav-sheet, .itp-nav-sheet-bg { display: none; }
+  @media (max-width: 768px) {
+    /* hide overflow nav items in the floatbar; sheet shows them all */
+    .itp-float-bar .itp-nav-item.itp-nav-idx-3,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-4,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-5,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-6,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-7,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-8,
+    .itp-float-bar .itp-nav-item.itp-nav-idx-9 { display: none; }
+    .itp-float-bar .itp-nav-more { display: flex; }
+  }
+  .itp-nav-sheet-bg {
+    position: fixed; inset: 0;
+    background: rgba(20,20,20,.35);
+    z-index: 1100;
+    opacity: 0; transition: opacity .18s ease-out;
+  }
+  .itp-nav-sheet-bg.show { display: block; opacity: 1; }
+  .itp-nav-sheet {
+    position: fixed; left: 0; right: 0;
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px));
+    z-index: 1101;
+    background: var(--surface, #fff);
+    border-top-left-radius: var(--radius-lg, 14px);
+    border-top-right-radius: var(--radius-lg, 14px);
+    box-shadow: 0 -8px 28px rgba(0,0,0,.18);
+    padding: 8px 16px 20px;
+    transform: translateY(100%);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1);
+  }
+  .itp-nav-sheet.show { display: block; transform: translateY(0); }
+  .itp-nav-sheet-handle {
+    width: 40px; height: 4px; border-radius: 2px;
+    background: rgba(120,120,120,.35);
+    margin: 6px auto 14px;
+  }
+  .itp-nav-sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 8px;
+  }
+  .itp-nav-sheet-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    padding: 8px 4px;
+    color: var(--on-surface, #2f3a2f);
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 10px;
+    transition: background-color .15s ease;
+  }
+  .itp-nav-sheet-item:active { background: rgba(120,120,120,.12); }
+  .itp-nav-sheet-item iconpark-icon { font-size: 24px; }
+  @media (prefers-color-scheme: dark) {
+    .itp-nav-sheet { background: #1d2326; }
+    .itp-nav-sheet-item { color: #e6e0d0; }
+    .itp-nav-sheet-bg { background: rgba(0,0,0,.55); }
+  }
+</style>
+<script>
+  (function () {
+    var btn = document.getElementById('itp_nav_more');
+    var sheet = document.getElementById('itp_nav_sheet');
+    var bg = document.getElementById('itp_nav_sheet_bg');
+    if (!btn || !sheet || !bg) return;
+    function open() {
+      sheet.style.display = 'block'; bg.style.display = 'block';
+      // next frame so the transition runs
+      requestAnimationFrame(function () { sheet.classList.add('show'); bg.classList.add('show'); });
+      sheet.setAttribute('aria-hidden', 'false');
+    }
+    function close() {
+      sheet.classList.remove('show'); bg.classList.remove('show');
+      sheet.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { sheet.style.display = 'none'; bg.style.display = 'none'; }, 220);
+    }
+    btn.addEventListener('click', function (e) { e.preventDefault(); sheet.classList.contains('show') ? close() : open(); });
+    bg.addEventListener('click', close);
+    sheet.querySelectorAll('.itp-nav-sheet-item').forEach(function (a) {
+      a.addEventListener('click', function () { close(); });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && sheet.classList.contains('show')) close();
+    });
+  })();
+</script>
+
+
 
 <style>
   .navicon {
@@ -282,7 +399,7 @@
   }
 </style>
   <!-- Main Content -->
-  <script src="js/html2canvas.js"></script>
+  <script src="js/html2canvas.min.js" defer></script>
 <script src="js/mini-live-photo.js"></script>
 <section class="pjax-area">
   <div class="content-area post-album fullscreen-content-area">
@@ -290,7 +407,7 @@
       <div class="fullscreen-pic gap-2 wrapper">
         <div id="all-pic" class="pic-area">
           <div id="pic-g" class="pic-item" />
-          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/sparkzky/gallery@master/Init/1.539w5jz46as0.webp" />
+          <img id="imgbox" class="pic-box" src="https://cdn.jsdelivr.net/gh/sparkzky/gallery@thumbnail//Init/1.539w5jz46as0.webp" />
         </div>
         <div id="exif-wrapper" class="pic-wrapper">
     <div class="exif-left" style="display: flex; flex-direction: column; justify-content: center;">
@@ -592,7 +709,7 @@
   
       </div>
       <script>
-        var imageBox = document.getElementById("imgbox"); // imageBox 是放置大图片的图框
+        var imageBox = document.getElementById("imgbox");
         var descBox = $("#descbox");
         var wrapper = $("#exif-wrapper");
         var exifParam = $("#exif-param");
@@ -605,7 +722,7 @@
         var normalData = $("#no-exif-data");
         var name = getParam('name');
         var editor = $("#editor");
-        imgno = 0; // 进入页面时，设定初始的图片编号为0 // 定义新变量时不使用 var 则为全局变量、
+        imgno = 0;
         imgLink = imageBox.src;
         function changeExifData(v) {
           if (Object.keys(v.exif_data).length === 0) {
@@ -629,15 +746,23 @@
           var v = JSON.parse(target.getAttribute('extra'));
           imageBox.src = thum;
           imageBox.classList.add('blur');
-          // load the original img.
           const highResImage = new Image();
           highResImage.src = imgLink;
-            highResImage.onload = function() {
-              imageBox.src = highResImage.src;
-              imageBox.classList.remove('blur');
+          highResImage.onload = function() {
+            imageBox.src = highResImage.src;
+            imageBox.classList.remove('blur');
+            // preload next image into browser cache
+            var nextIdx = Number(imgno) + 1;
+            if (nextIdx < len) {
+              var nextEl = document.getElementById(nextIdx);
+              if (nextEl) {
+                var prefetch = new Image();
+                prefetch.src = nextEl.getAttribute('rel');
+              }
+            }
           };
           imageBox.setAttribute("share", target.getAttribute('share'));
-          var imageFancy = imageBox.parentElement; // imageBox 是放置大图片的图框
+          var imageFancy = imageBox.parentElement;
           imageFancy.setAttribute("href", imgLink);
 
           var picg = document.getElementById('pic-g');
@@ -669,10 +794,23 @@
         } else {
           var value = $(`#0`)[0];
           name = value.getAttribute('name');
+          imgLink = value.getAttribute('rel');
           imageBox.title = value.getAttribute('desc');
           var v = JSON.parse(value.getAttribute('extra'));
           changeExifData(v);
           imageBox.setAttribute("share", value.getAttribute('share'));
+          // progressively load full-res for initial image without blur flash
+          const initHighRes = new Image();
+          initHighRes.src = imgLink;
+          initHighRes.onload = function() {
+            imageBox.src = initHighRes.src;
+            // preload second image
+            var nextEl = document.getElementById(1);
+            if (nextEl) {
+              var prefetch = new Image();
+              prefetch.src = nextEl.getAttribute('rel');
+            }
+          };
         }
 
         $('#download').click(function () {
@@ -693,7 +831,7 @@
         window.onkeydown = function album_hotkey() {
           //[键盘快捷键] 左箭头 上一张
           if (event.keyCode === 37) {
-            imgno = imgno - 1; // 设置图片编号-1
+            imgno = imgno - 1;
             if (imgno < 0) {
               imgno = 0;
             }
@@ -701,7 +839,7 @@
           };
           //[键盘快捷键] 右箭头 下一张
           if (event.keyCode === 39) {
-            imgcount = len - 1 //获取图片数量
+            imgcount = len - 1
             imgno = Number(imgno) + 1;
             if (imgno > imgcount) {
               imgno = imgcount
