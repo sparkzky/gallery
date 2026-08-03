@@ -39,7 +39,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!-- Title -->
   
-  <title>照片墙 - Take it easy</title>
+  <title>归档：2023/8 - 照片墙</title>
   <!-- 添加到主屏后的标题（iOS 6 新增） -->
   <meta name="apple-mobile-web-app-title" content="照片墙">
   <!-- 是否启用 WebApp 全屏模式 -->
@@ -407,54 +407,60 @@
 
 
   <!-- Main Content -->
-  <section class="pjax-area">
-  <div class="content-area album-area">
-    
-      <div class="container gpro-slogan title">
+  
+
+<section class="pjax-area">
+  <div class="content-area p-4 container max-w-[1280px]">
+    <div class="index-achieve-title title">2023/8</div>
+    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">分类</div>
+    <section class="itp-article-categories" style="list-style-type: none;">
+      <div class="itp-m3-chip-color-list">
         
-          火花
-            
       </div>
-      
-        <div id="year-button"></div>
-        <div class="container gpro-container grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          
-            
-            
-              
-                
-                  
-                  
-                  
-                  <a class="gpro-tile" href="/gallery/Init">
-                    <img src="https://cdn.jsdelivr.net/gh/sparkzky/gallery@thumbnail/Init/init.webp" alt="Init" width="1000" height="667"
-                         decoding="async"
-                         loading="eager"
-                         fetchpriority="high">
-                    <div class="gpro-tile-descr flex-col">
-                      <div class="text-xl font-medium">
-                        Init
-                      </div>
-                      
-                        
-                          <div class="text-sm opacity-75">
-                            2025-04-18
-                          </div>
-                          
-                    </div>
-                  </a>
-                
-              
-            
-        </div>
+    </section>
+    <div class="text-2xl leading-10 py-2 col-span-1 md:col-span-3 text-tblack dark:text-white">标签</div>
+    <section class="itp-article-categories" style="list-style-type: none;">
+      <div class="itp-m3-chip-normal-list">
+        
+      </div>
+    </section>
+    <!-- learn from https://hughsite.com/post/hexo-modify-theme.html -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  
+  
+  
+  
+  <p class="text-2xl leading-10 py-2 col-span-1 md:col-span-2 lg:col-span-3 gap-1 text-tblack dark:text-white">2023</p>
+  
+  
+  <div class="h-auto px-3 py-1 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-all">
+    <a href="/gallery/2023/undefined/" class="flex items-center">
+      <div class="px-1">
+        <div class="post-title text-tblack dark:text-white">照片集</div>
+        <span class="text-sm leading-4 text-gray-400">2023-08-18</span>
+        
+      </div>
+    </a>
   </div>
-  <script>
-    $(function () {
-      // 图块已改用原生 loading="lazy"，不再需要 lazyload.js 接管首页。
-      addYearEndSummaryLink(document.getElementById("year-button"), "https://sparkzky.github.io/gallery")
-    });
-  </script>
+  
+  
+</div>
+<style>
+  .post-title {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .post-icon {
+    font-size: 1.2em;
+    color: #9DA3AE;
+  }
+</style>
+  </div>
 </section>
+<!--learn from https://github.com/fluid-dev/hexo-theme-fluid/blob/master/layout/archive.ejs-->
   <!-- Footer -->
   <!-- Footer -->
 <footer class="itp-footer text-center">
@@ -518,39 +524,6 @@
 <!---->
 <!---->
 <!--首页键盘快捷键-->
-
-<script>
-  window.onkeydown = function allpage_hotkey() {
-    //[键盘快捷键] Shift+1 首页
-    if (event.shiftKey && event.keyCode === 49) {
-      window.location.href = "/gallery/"
-    };
-    //[键盘快捷键] Shift+2 归档页
-    if (event.shiftKey && event.keyCode === 50) {
-      window.location.href = "/archives/"
-    };
-    //[键盘快捷键] Shift+3 相册页
-    if (event.shiftKey && event.keyCode === 51) {
-      window.location.href = "/gallery/"
-    };
-    //[键盘快捷键] Shift+4 关于页
-    if (event.shiftKey && event.keyCode === 52) {
-      window.location.href = "/about/"
-    };
-    //[键盘快捷键] Shift+5 友情链接页
-    if (event.shiftKey && event.keyCode === 53) {
-      window.location.href = "/links/"
-    };
-    //[键盘快捷键] 左箭头 上一页
-    if (event.keyCode === 37) {
-      window.location.href = "/gallery/"
-    };
-    //[键盘快捷键] 右箭头 下一页
-    if (event.keyCode === 39) {
-      window.location.href = "/gallery/"
-    };
-  }
-</script>
 
 
 
